@@ -5,30 +5,36 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function FirstPage() {
+export default function CreateAccount() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [nome, setNome] = useState("")
+    const [picture, setPicture] = useState("")
     const navigate = useNavigate()
-    function login(event) {
+    function register(event){
         event.preventDefault();
-        const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",{email:email,password:password} )
-        request.then(() => navigate("/habitos",))
-        request.catch((err) => alert(err.response.data.message))    
+        const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up",{email:email,name:nome,image:picture,password:password} );
+        request.then(() => navigate("/"))
     }
 
-    return (<>
-        <Logo src={logo} />
-        <Form1 onSubmit={login} >
-            <Input1 placeholder="email" type="email" onChange={e => setEmail(e.target.value)} required />
-            <Input1 placeholder="senha" type="password" onChange={e => setPassword(e.target.value)} required />
-            <Button1 type="submit"  >Entrar  </Button1>
-        </Form1>
-        <Link to="/cadastro">
-            <P1 >Não tem uma conta? Cadastre-se!</P1>
-        </Link>
-    </>
+    return (
+        <>
+            <Logo src={logo} />
+            <Form1 onSubmit={register} >
+                <Input1 placeholder="email" type="email" onChange={e => setEmail(e.target.value)} required />
+                <Input1 placeholder="senha" type="password" onChange={e => setPassword(e.target.value)} required />
+                <Input1 placeholder="nome" type="text" onChange={e => setNome(e.target.value)} required />
+                <Input1 placeholder="foto" type="url" onChange={e => setPicture(e.target.value)} required />
+                <Button1 type="submit"  >Cadastrar  </Button1>
+            </Form1>
+            <Link to="/cadastro">
+                <P1 >Já tem uma conta? Faça login!</P1>
+            </Link>
+        </>
+
     )
 }
+
 
 const Logo = styled.img`
 margin-top:68PX;
