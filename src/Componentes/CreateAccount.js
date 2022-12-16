@@ -1,31 +1,35 @@
 import logo from "../images/Group 8.png"
 import styled from "styled-components"
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Context from "./Context";
 
 export default function CreateAccount() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [nome, setNome] = useState("")
-    const [picture, setPicture] = useState("")
+    const [disableButton, setDisableButton] = useState(false)
+    const {picture,setPicture }= useContext(Context)
     const navigate = useNavigate()
     function register(event){
         event.preventDefault();
+        setDisableButton(true)
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up",{email:email,name:nome,image:picture,password:password} );
         request.then(() => navigate("/"))
+        request.catch((err)=> alert("Ocorreu um erro, tente novamente",setDisableButton(false)))
     }
 
     return (
         <>
             <Logo src={logo} />
             <Form1 onSubmit={register} >
-                <Input1 placeholder="email" type="email" onChange={e => setEmail(e.target.value)} required />
-                <Input1 placeholder="senha" type="password" onChange={e => setPassword(e.target.value)} required />
-                <Input1 placeholder="nome" type="text" onChange={e => setNome(e.target.value)} required />
-                <Input1 placeholder="foto" type="url" onChange={e => setPicture(e.target.value)} required />
-                <Button1 type="submit"  >Cadastrar  </Button1>
+                <Input1 disabled={disableButton} placeholder="email" type="email" onChange={e => setEmail(e.target.value)} required />
+                <Input1 disabled={disableButton} placeholder="senha" type="password" onChange={e => setPassword(e.target.value)} required />
+                <Input1 disabled={disableButton} placeholder="nome" type="text" onChange={e => setNome(e.target.value)} required />
+                <Input1 disabled={disableButton} placeholder="foto" type="url" onChange={e => setPicture(e.target.value)} required />
+                <Button1 disabled={disableButton} type="submit"  >Cadastrar  </Button1>
             </Form1>
             <Link to="/cadastro">
                 <P1 >Já tem uma conta? Faça login!</P1>

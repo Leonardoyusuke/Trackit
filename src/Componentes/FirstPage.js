@@ -4,31 +4,38 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { ColorRing } from  'react-loader-spinner'
 
 export default function FirstPage() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [disableButton, setDisableButton] = useState(false)
+    const [loading, setLoading] = useState("Entrar")
     const navigate = useNavigate()
     function login(event) {
         event.preventDefault();
-        const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",{email:email,password:password} )
-        request.then(() => navigate("/habitos",))
-        request.catch((err) => alert(err.response.data.message))    
+        setDisableButton(true)
+        setLoading(ColorRing)
+        const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: email, password: password })
+        request.then(() => navigate("/habitos"))
+        request.catch((err) => alert(err.response.data.message), setDisableButton(false))
     }
 
-    return (<>
-        <Logo src={logo} />
-        <Form1 onSubmit={login} >
-            <Input1 placeholder="email" type="email" onChange={e => setEmail(e.target.value)} required />
-            <Input1 placeholder="senha" type="password" onChange={e => setPassword(e.target.value)} required />
-            <Button1 type="submit"  >Entrar  </Button1>
-        </Form1>
-        <Link to="/cadastro">
-            <P1 >Não tem uma conta? Cadastre-se!</P1>
-        </Link>
-    </>
+    return (
+        <>
+            <Logo src={logo} />
+            <Form1 onSubmit={login} >
+                <Input1 disabled={disableButton} placeholder="email" type="email" onChange={e => setEmail(e.target.value)} required />
+                <Input1 disabled={disableButton} placeholder="senha" type="password" onChange={e => setPassword(e.target.value)} required />
+                <Button1 disabled={disableButton} type="submit"  >{loading}  </Button1>
+            </Form1>
+            <Link to="/cadastro">
+                <P1 >Não tem uma conta? Cadastre-se!</P1>
+            </Link>
+        </>
     )
 }
+
 
 const Logo = styled.img`
 margin-top:68PX;
