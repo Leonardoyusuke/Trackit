@@ -2,14 +2,15 @@ import styled from "styled-components"
 import React, { useContext } from "react";
 import Context from "./Context";
 
-export default function Tops(){
-    const {picture,setPicture} = useContext(Context)
 
+export default function Tops(){
+
+    const foto = localStorage.getItem('picture');
     return(
         <>
         <Top>
         <Logo>TrackIt</Logo>
-        <Foto src={picture} />
+        <Foto src={foto} />
         </Top>
       
         </>

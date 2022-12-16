@@ -8,11 +8,18 @@ import { useState } from "react";
 
 function App() {
 
-  const [picture, setPicture] = useState("")
+  //const [picture, setPicture] = useState("")
+  const [day,setDay] = useState([])
+  const [clicado,setClicado] = useState([false,false,false,false,false,false,false])
+  const [token,setToken] = useState("")
+  const [nomeHabito, setNomeHabito] = useState("")
+
+
 
   return (
     <>
-      <Context.Provider value={{picture,setPicture}} >
+      <Context.Provider value={{day,setDay,clicado,setClicado,token,setToken,nomeHabito,setNomeHabito}}
+      >
         <BrowserRouter>
           <GlobalStyle />
           <Routes>

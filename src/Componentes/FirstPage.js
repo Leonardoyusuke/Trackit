@@ -1,23 +1,27 @@
 import logo from "../images/Group 8.png"
 import styled from "styled-components"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { ColorRing } from  'react-loader-spinner'
+import Context from "./Context";
 
 export default function FirstPage() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [disableButton, setDisableButton] = useState(false)
     const [loading, setLoading] = useState("Entrar")
+    const {token,setToken} = useContext(Context)
     const navigate = useNavigate()
     function login(event) {
         event.preventDefault();
         setDisableButton(true)
         setLoading(ColorRing)
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: email, password: password })
-        request.then(() => navigate("/habitos"))
+        request.then((response) =>{
+            setToken(response.data.token); 
+            navigate("/habitos")})
         request.catch((err) => alert(err.response.data.message), setDisableButton(false))
     }
 

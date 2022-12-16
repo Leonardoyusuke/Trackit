@@ -16,6 +16,7 @@ export default function CreateAccount() {
     function register(event){
         event.preventDefault();
         setDisableButton(true)
+        localStorage.setItem('picture',picture)
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up",{email:email,name:nome,image:picture,password:password} );
         request.then(() => navigate("/"))
         request.catch((err)=> alert("Ocorreu um erro, tente novamente",setDisableButton(false)))
