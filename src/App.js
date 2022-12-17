@@ -12,13 +12,13 @@ function App() {
   const [day,setDay] = useState([])
   const [clicado,setClicado] = useState([false,false,false,false,false,false,false])
   const [token,setToken] = useState("")
-  const [nomeHabito, setNomeHabito] = useState("")
+  const [picture,setPicture] = useState("")
 
 
 
   return (
     <>
-      <Context.Provider value={{day,setDay,clicado,setClicado,token,setToken,nomeHabito,setNomeHabito}}
+      <Context.Provider value={{day,setDay,clicado,setClicado,token,setToken,picture,setPicture}}
       >
         <BrowserRouter>
           <GlobalStyle />

@@ -12,48 +12,45 @@ import Context from "./Context";
 export default function Habits() {
     const [noHabit, setNoHabit] = useState("")
     const [infs, setInfs] = useState("")
-    const { day, setDay, clicado, setClicado, token,nomeHabito,setNomeHabito } = useContext(Context)
+    const { day, setDay, clicado, setClicado, token, } = useContext(Context)
     const [myHabits,setMyHabits] = useState([])
+    const header = { headers: { 'Authorization': `Bearer ${token}` }}
+    const [nomeHabito, setNomeHabito] = useState({})
     console.log(nomeHabito)
-    console.log(day)
-    console.log(token,"token")
     useEffect(() => {
-        const header = { headers: { 'Authorization': `Bearer ${token}` }}
-        console.log(header);
         const request2 = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",header);
     request2.then((r)=> setMyHabits(r.data));
     request2.catch(()=> setNoHabit(<Text>"Você não tem nenhum hábito cadastrado ainda.
     Adicione um hábito para começar a trackear!"</Text>)  )}
      , [])
 
-
     function cancel() {
         setInfs("")
+        setNomeHabito("")
+        setDay("")
     }
-    function settingDays(event) {
-        event.preventDefault();
-        const name = `${nomeHabito}`
-        console.log(name, 'nome')
-        const header = { headers: { 'Authorization': `Bearer ${token}` }}
-      //  const body ={ 
-        //    name: {nomeHabito}, 
-          //  days: {day} }
-       // console.log(body,'body')
+    function funcName (e){
+        setNomeHabito({name: e.target.value})
+    }
+    console.log(day)
+    console.log(token)
+    function SettingDays(e) {
+        e.preventDefault();
+        setNomeHabito(e.target.value)
+        console.log(day)
+        console.log(token)
+        const body ={name:nomeHabito.name,days:day}
+        console.log(nomeHabito, 'nome')
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
-        {name: name, days:day}, header)
+        body,header)
+        console.log(request)
         request.then(() => setInfs(""));
         request.catch((err) => alert(err.response.data.message))
         console.log(request)
     }
 
     function openHabit() {
-        setInfs(<CreateHabit onSubmit={settingDays} >
-            <Input1 placeholder="nome do habito" type="text" onChange={e => setNomeHabito(e.target.value)} required />
-            <FixLayout>
-                <Days />
-            </FixLayout>
-            <FixLayout1><P onClick={cancel}>cancelar</P><Button1 type="submit" >Salvar</Button1></FixLayout1>
-        </CreateHabit>)
+        setInfs(true)
     }
     return (
         <>
@@ -62,10 +59,16 @@ export default function Habits() {
                 <Create>Meus hábitos <Button onClick={openHabit}>+</Button>
                 </Create>
                 <mark>
-                {infs}
+                {infs?<CreateHabit onSubmit={(() => SettingDays)} >
+            <Input1 placeholder="nome do habito" type="text" onChange={funcName} required />
+            <FixLayout>
+                <Days />
+            </FixLayout>
+            <FixLayout1><P onClick={cancel}>cancelar</P><Button1 type="submit" >Salvar</Button1></FixLayout1>
+        </CreateHabit>:<></>}
                 </mark>
-                {myHabits.map((h)=><Box>
-                <p>{h.name}</p>
+                {myHabits.map((h)=><Box key={h.id} >
+                <p>{h.name}</p><div>{h.day}</div>
                 </Box> ) }
                 {noHabit}
             </BackColor>

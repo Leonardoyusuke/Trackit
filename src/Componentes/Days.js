@@ -41,3 +41,4 @@ export default function Days(){
     font-size: 19.976px;
     line-height: 25px;
     color: ${props => props.clicado?"#FFFFFF":"#DBDBDB"};`
+
