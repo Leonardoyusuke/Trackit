@@ -40,7 +40,7 @@ font-weight: 400;
 font-size: 38.982px;
 line-height: 49px;
 color: #FFFFFF;
-margin:0px`
+margin:0px;`
 
 const Top = styled.div`
 position: relative;

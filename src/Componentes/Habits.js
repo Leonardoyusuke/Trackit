@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useContext,useEffect } from "react"
+import { useContext, useEffect } from "react"
 import axios from "axios";
 import Tops from "./Tops";
 import { BsTrash } from "react-icons/bs";
@@ -14,62 +14,63 @@ import { icons } from "react-icons";
 export default function Habits() {
     const [noHabit, setNoHabit] = useState("")
     const [infs, setInfs] = useState("")
-    const { day, setDay, clicado, setClicado, token, setToken,reload,setReload,myHabits,setMyHabits } = useContext(Context)
+    const { day, setDay, clicado, setClicado, token, setToken, reload, setReload, myHabits, setMyHabits } = useContext(Context)
     const [nomeHabito, setNomeHabito] = useState({});
     const weekdays = "DSTQQSS".split("");
 
 
-    if(!token){
+    if (!token) {
         const tokenLocal = localStorage.getItem('token');
         setToken(tokenLocal);
     }
-    let header = { headers: { 'Authorization': `Bearer ${token}` }}
+    let header = { headers: { 'Authorization': `Bearer ${token}` } }
     useEffect(() => {
         const tokenEffect = token;
-        if(!tokenEffect){
+        if (!tokenEffect) {
             tokenEffect = localStorage.getItem('token');
         }
-        header = { headers: { 'Authorization': `Bearer ${tokenEffect}` }}
-        const request2 = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",header);
-    request2.then((r)=> setMyHabits(r.data));
-    request2.catch(()=> setNoHabit(<Text>"Você não tem nenhum hábito cadastrado ainda.
-    Adicione um hábito para começar a trackear!"</Text>)  )}
-     , [reload])
+        header = { headers: { 'Authorization': `Bearer ${tokenEffect}` } }
+        const request2 = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", header);
+        request2.then((r) => setMyHabits(r.data));
+        request2.catch(() => setNoHabit(<Text>"Você não tem nenhum hábito cadastrado ainda.
+            Adicione um hábito para começar a trackear!"</Text>))
+    }
+        , [reload])
 
     function cancel() {
         setInfs("")
     }
 
 
-    function funcName (e){
-        setNomeHabito({name: e.target.value})
+    function funcName(e) {
+        setNomeHabito({ name: e.target.value })
     }
     function settingDays(e) {
         setReload(!reload)
         e.preventDefault();
-        console.log(header,'header insid')
-        const body ={name:nomeHabito.name,days:day}
+        console.log(header, 'header insid')
+        const body = { name: nomeHabito.name, days: day }
         console.log(body, 'body inside')
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
-        body,header)
+            body, header)
         console.log(request)
-        request.then(() => setInfs(""),setReload(!reload));
-        request.catch((err) => alert(err.response.data.message),setReload(!reload))
+        request.then(() => setInfs(""), setReload(!reload));
+        request.catch((err) => alert(err.response.data.message), setReload(!reload))
         console.log(request)
         console.log(day)
         setDay([])
-        setClicado([false,false,false,false,false,false,false])
+        setClicado([false, false, false, false, false, false, false])
         setReload(!reload)
         setNoHabit("")
 
     }
-   
-    function delet(id){
-            axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,header)
-                .then(() => alert('Delete successful'),setReload(!reload));
-    
-                setReload(!reload)
-       
+
+    function delet(id) {
+        axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, header)
+            .then(() => alert('Delete successful'), setReload(!reload));
+
+        setReload(!reload)
+
     }
 
     function openHabit() {
@@ -87,27 +88,27 @@ export default function Habits() {
                 <Tops />
                 <Create>Meus hábitos <Button onClick={openHabit}>+</Button>
                 </Create>
-                <mark>
-                {infs?<CreateHabit onSubmit={settingDays} >
-            <Input1 placeholder="nome do habito" type="text" onChange={funcName} required />
-            <FixLayout>
-                <Days />
-            </FixLayout>
-            <FixLayout1><P onClick={cancel}>cancelar</P><Button1 type="submit" >Salvar</Button1></FixLayout1>
-        </CreateHabit>:<></>}
-                </mark>
+                <Mark>
+                    {infs ? <CreateHabit onSubmit={settingDays} >
+                        <Input1 placeholder="nome do habito" type="text" onChange={funcName} required />
+                        <FixLayout>
+                            <Days />
+                        </FixLayout>
+                        <FixLayout1><P onClick={cancel}>cancelar</P><Button1 type="submit" >Salvar</Button1></FixLayout1>
+                    </CreateHabit> : <></>}
+                </Mark>
                 {myHabits.map((h) =>
-                <Box key={h.id} >
-                <Div2>
-                <p>{h.name}</p>  <BsTrash onClick={() => delet(h.id) } ></BsTrash> </Div2>
-                <Div1>
-                {weekdays.map((day,index) =>
-					<Dia  clicado={h.days.includes(index)}>
-						{day}
-					</Dia>
-				)}
-                </Div1>
-                </Box> ) }
+                    <Box key={h.id} >
+                        <Div2>
+                            <p>{h.name}</p>  <BsTrash onClick={() => delet(h.id)} ></BsTrash> </Div2>
+                        <Div1>
+                            {weekdays.map((day, index) =>
+                                <Dia key={index} clicado={h.days.includes(index)}>
+                                    {day}
+                                </Dia>
+                            )}
+                        </Div1>
+                    </Box>)}
                 {noHabit}
             </BackColor>
             <Bottom />
@@ -115,6 +116,9 @@ export default function Habits() {
 
     )
 }
+const Mark = styled.div`
+width:527px;
+box-sizing:border-box;`
 
 const Div2 = styled.div`
 display:flex;
@@ -136,7 +140,7 @@ const Dia = styled.div`
     width: 30px;
     height: 30px;
     left: 36px;
-    background: ${props => props.clicado?"#CFCFCF":"#FFFFFF"};
+    background: ${props => props.clicado ? "#CFCFCF" : "#FFFFFF"};
     border: 1px solid #D5D5D5;
     border-radius: 5px;
     margin-right:4px;
@@ -150,7 +154,7 @@ const Dia = styled.div`
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    color: ${props => props.clicado?"#FFFFFF":"#DBDBDB"};`
+    color: ${props => props.clicado ? "#FFFFFF" : "#DBDBDB"};`
 
 
 const Box = styled.div`
@@ -231,7 +235,8 @@ background-color: #F2F2F2;
 const BackColor = styled.div`
 background-color:#F2F2F2;
 width: 375px;
-height:527px;`
+height:527px;
+margin-top:70px;`
 
 const Text = styled.p`
 width: 338px;

@@ -1,10 +1,13 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 export default function  Bottom(){
     return(
         <>
         <BottomLayout>
         <ButtonsBot>Hábitos</ButtonsBot>
-        <p>HoJE</p>
+        <Link to="/hoje">
+                <p>Hoje</p>
+            </Link>
         <ButtonsBot>Histórico</ButtonsBot>
         </BottomLayout>
         </>
@@ -26,4 +29,6 @@ height: 70px;
 background: #FFFFFF;
 display:flex;
 justify-content:space-around;
-position:fixed;`
+position:fixed;
+bottom: 0px;
+z-index:1`

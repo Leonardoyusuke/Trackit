@@ -5,6 +5,7 @@ import CreateAccount from "./Componentes/CreateAccount";
 import Habits from "./Componentes/Habits";
 import Context from "./Componentes/Context";
 import { useState } from "react";
+import Hoje from "./Componentes/Hoje";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/" element={<FirstPage />} />
             <Route path="/cadastro" element={<CreateAccount  />} />
             <Route path="/habitos" element={<Habits  />} />
+            <Route path="/hoje" element={<Hoje />} />
           </Routes>
         </BrowserRouter>
       </Context.Provider>
