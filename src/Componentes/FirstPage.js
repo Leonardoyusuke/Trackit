@@ -20,9 +20,15 @@ export default function FirstPage() {
         setLoading(ColorRing)
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: email, password: password })
         request.then((response) =>{
-            setToken(response.data.token); 
+            setToken(response.data.token);
+            console.log(response.data.token);
+            saveToken(response); 
             navigate("/habitos")})
         request.catch((err) => alert(err.response.data.message), setDisableButton(false))
+    }
+    function saveToken(response){
+        localStorage.setItem('token',response.data.token)
+        console.log(token)
     }
 
     return (

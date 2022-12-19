@@ -5,19 +5,19 @@ export default function Days(){
     const {day,setDay,clicado,setClicado } = useContext(Context)
     function clicked(days){
         const newClicado = clicado;
-        const newItem = !newClicado[days-1];
-        newClicado[days-1]= newItem;
+        const newItem = !newClicado[days];
+        newClicado[days]= newItem;
         setClicado(newClicado);
         setDay([...day,days])
     }
     return(<>
-    <Dia clicado={clicado[0]} onClick={() => clicked(1)}>D</Dia>
-    <Dia clicado={clicado[1]} onClick={() => clicked(2)}>S</Dia>
-    <Dia clicado={clicado[2]} onClick={() => clicked(3)}>T</Dia>
-    <Dia clicado={clicado[3]} onClick={() => clicked(4)}>Q</Dia>
-    <Dia clicado={clicado[4]} onClick={() => clicked(5)}>Q</Dia>
-    <Dia clicado={clicado[5]} onClick={() => clicked(6)}>S</Dia>
-    <Dia clicado={clicado[6]} onClick={() => clicked(7)}>S</Dia>
+    <Dia clicado={clicado[0]} onClick={() => clicked(0)}>D</Dia>
+    <Dia clicado={clicado[1]} onClick={() => clicked(1)}>S</Dia>
+    <Dia clicado={clicado[2]} onClick={() => clicked(2)}>T</Dia>
+    <Dia clicado={clicado[3]} onClick={() => clicked(3)}>Q</Dia>
+    <Dia clicado={clicado[4]} onClick={() => clicked(4)}>Q</Dia>
+    <Dia clicado={clicado[5]} onClick={() => clicked(5)}>S</Dia>
+    <Dia clicado={clicado[6]} onClick={() => clicked(6)}>S</Dia>
     </>
 )
     }

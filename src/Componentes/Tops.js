@@ -49,4 +49,6 @@ height: 70px;
 left: 0px;
 top: 0px;
 background: #126BA5;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);`
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+position:fixed;
+margin-left:8px`
