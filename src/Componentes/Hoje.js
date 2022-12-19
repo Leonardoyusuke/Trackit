@@ -11,8 +11,9 @@ import { BsCheckSquareFill } from "react-icons/bs";
 
 
 export default function Hoje() {
+    const [check,setcheck] = useState(false)
     const today = dayjs().locale("pt-br").format("dddd, DD/MM");
-    const { day, setDay, clicado, setClicado, token, setToken, reload, setReload, myHabits, setMyHabits } = useContext(Context)
+    const { day, setDay, clicado, setClicado, token, setToken, reload, setReload, myHabits, setMyHabits,listaCheck,setListaCheck } = useContext(Context)
     const [todayHabits,setTodayHabits] = useState([])
     if (!token) {
         const tokenLocal = localStorage.getItem('token');
@@ -26,18 +27,22 @@ export default function Hoje() {
         }
         header = { headers: { 'Authorization': `Bearer ${tokenEffect}` } }
         const request3 = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", header);
-        request3.then((r) => setTodayHabits(r.data),console.log(todayHabits.done),console.log(request3));
+        request3.then((r) => setTodayHabits(r.data),console.log(todayHabits),console.log(todayHabits.length));
         request3.catch((r) => alert(r.data) ) 
     }
         , [reload])
 
     function feito(t){
+        if(check==false){
         const request4 = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${t.id}/check`,{}, header)
-        request4.then(() => setReload(!reload));
-        request4.catch((r) => console.log(r.data))
+        request4.then(() => setReload(!reload),setcheck(true));
+        request4.catch((r) => console.log(r.data))}
+        else{
+            const request5 = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${t.id}/uncheck`,{},header);
+            request5.then(() => setReload(!reload),setcheck(false));
+            request5.catch((r) => console.log(r.data))}
+        }
 
-    
-    }
 
     return (<>
         <BackColor>

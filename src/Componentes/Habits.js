@@ -86,7 +86,7 @@ export default function Habits() {
         <>
             <BackColor>
                 <Tops />
-                <Create>Meus hábitos <Button onClick={openHabit}>+</Button>
+                <Create><Titulo>Meus hábitos</Titulo> <Button onClick={openHabit}>+</Button>
                 </Create>
                 <Mark>
                     {infs ? <CreateHabit onSubmit={settingDays} >
@@ -116,6 +116,17 @@ export default function Habits() {
 
     )
 }
+const Titulo = styled.p`
+width: 148px;
+height: 29px;
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 22.976px;
+line-height: 29px;
+color: #126BA5;`
+
+
 const Mark = styled.div`
 width:527px;
 box-sizing:border-box;`
@@ -213,6 +224,7 @@ background: #52B6FF;
 border-radius: 4.63636px;
 text-align: center;
 color: white;
+margin-top: 18px;
 `
 
 const Create = styled.div`

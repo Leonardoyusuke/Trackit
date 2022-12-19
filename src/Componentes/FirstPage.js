@@ -23,7 +23,7 @@ export default function FirstPage() {
             setToken(response.data.token);
             console.log(response.data.token);
             saveToken(response); 
-            navigate("/habitos")})
+            navigate("/hoje")})
         request.catch((err) => alert(err.response.data.message), setDisableButton(false))
     }
     function saveToken(response){
