@@ -26,13 +26,13 @@ export default function CreateAccount() {
         <>
             <Logo src={logo} />
             <Form1 onSubmit={register} >
-                <Input1 disabled={disableButton} placeholder="email" type="email" onChange={e => setEmail(e.target.value)} required />
-                <Input1 disabled={disableButton} placeholder="senha" type="password" onChange={e => setPassword(e.target.value)} required />
-                <Input1 disabled={disableButton} placeholder="nome" type="text" onChange={e => setNome(e.target.value)} required />
-                <Input1 disabled={disableButton} placeholder="foto" type="url" onChange={e => setPicture(e.target.value)} required />
-                <Button1 disabled={disableButton} type="submit"  >Cadastrar  </Button1>
+                <Input1 data-test="email-input" disabled={disableButton} placeholder="email" type="email" onChange={e => setEmail(e.target.value)} required />
+                <Input1 data-test="password-input" disabled={disableButton} placeholder="senha" type="password" onChange={e => setPassword(e.target.value)} required />
+                <Input1 data-test="user-name-input" disabled={disableButton} placeholder="nome" type="text" onChange={e => setNome(e.target.value)} required />
+                <Input1 data-test="user-image-input" disabled={disableButton} placeholder="foto" type="url" onChange={e => setPicture(e.target.value)} required />
+                <Button1  data-test="signup-btn"  disabled={disableButton} type="submit"  >Cadastrar  </Button1>
             </Form1>
-            <Link to="/cadastro">
+            <Link  data-test="login-link" to="/cadastro">
                 <P1 >Já tem uma conta? Faça login!</P1>
             </Link>
         </>

@@ -86,24 +86,24 @@ export default function Habits() {
         <>
             <BackColor>
                 <Tops />
-                <Create><Titulo>Meus hábitos</Titulo> <Button onClick={openHabit}>+</Button>
+                <Create><Titulo>Meus hábitos</Titulo> <Button data-test="habit-create-btn" onClick={openHabit}>+</Button>
                 </Create>
                 <Mark>
-                    {infs ? <CreateHabit onSubmit={settingDays} >
-                        <Input1 placeholder="nome do habito" type="text" onChange={funcName} required />
+                    {infs ? <CreateHabit data-test="habit-create-container" onSubmit={settingDays} >
+                        <Input1 data-test="habit-name-input" placeholder="nome do habito" type="text" onChange={funcName} required />
                         <FixLayout>
                             <Days />
                         </FixLayout>
-                        <FixLayout1><P onClick={cancel}>cancelar</P><Button1 type="submit" >Salvar</Button1></FixLayout1>
+                        <FixLayout1><P data-test="habit-create-cancel-btn" onClick={cancel}>cancelar</P><Button1 data-test="habit-create-save-btn" type="submit" >Salvar</Button1></FixLayout1>
                     </CreateHabit> : <></>}
                 </Mark>
                 {myHabits.map((h) =>
-                    <Box key={h.id} >
+                    <Box data-test="habit-container" key={h.id} >
                         <Div2>
-                            <p>{h.name}</p>  <BsTrash onClick={() => delet(h.id)} ></BsTrash> </Div2>
+                            <p data-test="habit-name" >{h.name}</p>  <BsTrash data-test="habit-delete-btn" onClick={() => delet(h.id)} ></BsTrash> </Div2>
                         <Div1>
                             {weekdays.map((day, index) =>
-                                <Dia key={index} clicado={h.days.includes(index)}>
+                                <Dia data-test="habit-day" key={index} clicado={h.days.includes(index)}>
                                     {day}
                                 </Dia>
                             )}

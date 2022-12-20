@@ -35,11 +35,11 @@ export default function FirstPage() {
         <>
             <Logo src={logo} />
             <Form1 onSubmit={login} >
-                <Input1 disabled={disableButton} placeholder="email" type="email" onChange={e => setEmail(e.target.value)} required />
-                <Input1 disabled={disableButton} placeholder="senha" type="password" onChange={e => setPassword(e.target.value)} required />
-                <Button1 disabled={disableButton} type="submit"  >{loading}  </Button1>
+                <Input1  data-test="email-input" disabled={disableButton} placeholder="email" type="email" onChange={e => setEmail(e.target.value)} required />
+                <Input1 data-test="password-input" disabled={disableButton} placeholder="senha" type="password" onChange={e => setPassword(e.target.value)} required />
+                <Button1 data-test="login-btn" disabled={disableButton} type="submit"  >{loading}  </Button1>
             </Form1>
-            <Link to="/cadastro">
+            <Link data-test="signup-link" to="/cadastro">
                 <P1 >Não tem uma conta? Cadastre-se!</P1>
             </Link>
         </>

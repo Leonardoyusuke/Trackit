@@ -47,15 +47,15 @@ export default function Hoje() {
     return (<>
         <BackColor>
             <Tops />
-            <P1>{today}</P1>
-            <P2>Nenhum hábito concluído ainda</P2>
+            <P1 data-test="today">{today}</P1>
+            <P2 data-test="today-counter"  >Nenhum hábito concluído ainda</P2>
             {todayHabits.map((t)=>{
             return(
-            <Habit key={t.id}>
-                <HabitTittle>{t.name} </HabitTittle>
-                <HabitText color={t.done ? "#8FC549" : "#E7E7E7"} >Sequência atual: {t.currentSequence} dias</HabitText>
-                <HabitText>Seu recorde: {t.highestSequence} dias</HabitText>
-                <BsCheckSquareFill color={t.done ? "#8FC549" : "#E7E7E7"} onClick={() => feito(t)} ></BsCheckSquareFill>
+            <Habit data-test="today-habit-container" key={t.id}>
+                <HabitTittle data-test="today-habit-name" >{t.name} </HabitTittle>
+                <HabitText data-test="today-habit-record" color={t.done ? "#8FC549" : "#E7E7E7"} >Sequência atual: {t.currentSequence} dias</HabitText>
+                <HabitText data-test="today-habit-record" >Seu recorde: {t.highestSequence} dias</HabitText>
+                <BsCheckSquareFill data-test="today-habit-check-btn" color={t.done ? "#8FC549" : "#E7E7E7"} onClick={() => feito(t)} ></BsCheckSquareFill>
             </Habit>)})}
 
             <Bottom />

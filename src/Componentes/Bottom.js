@@ -19,16 +19,16 @@ export default function Bottom() {
 
     return (
         <>
-            <BottomLayout>
-                <Link to="/habitos">
+            <BottomLayout data-test="menu">
+                <Link data-test="habit-link" to="/habitos">
                     <ButtonsBot>Hábitos</ButtonsBot>
                 </Link>
-                <Link to="/hoje">
+                <Link data-test="today-link" to="/hoje">
                     <div style={{ width: 90, height: 90 }}>
                         <CircularProgressbar text="Hoje" value={percentage} />
                     </div>            
                 </Link>
-                <Link to="/historico">
+                <Link data-test="history-link" to="/historico">
                     <ButtonsBot>Histórico</ButtonsBot></Link>
             </BottomLayout>
         </>

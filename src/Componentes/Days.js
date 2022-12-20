@@ -11,13 +11,13 @@ export default function Days(){
         setDay([...day,days])
     }
     return(<>
-    <Dia clicado={clicado[0]} onClick={() => clicked(0)}>D</Dia>
-    <Dia clicado={clicado[1]} onClick={() => clicked(1)}>S</Dia>
-    <Dia clicado={clicado[2]} onClick={() => clicked(2)}>T</Dia>
-    <Dia clicado={clicado[3]} onClick={() => clicked(3)}>Q</Dia>
-    <Dia clicado={clicado[4]} onClick={() => clicked(4)}>Q</Dia>
-    <Dia clicado={clicado[5]} onClick={() => clicked(5)}>S</Dia>
-    <Dia clicado={clicado[6]} onClick={() => clicked(6)}>S</Dia>
+    <Dia data-test="habit-day" clicado={clicado[0]} onClick={() => clicked(0)}>D</Dia>
+    <Dia data-test="habit-day" clicado={clicado[1]} onClick={() => clicked(1)}>S</Dia>
+    <Dia data-test="habit-day" clicado={clicado[2]} onClick={() => clicked(2)}>T</Dia>
+    <Dia data-test="habit-day" clicado={clicado[3]} onClick={() => clicked(3)}>Q</Dia>
+    <Dia data-test="habit-day" clicado={clicado[4]} onClick={() => clicked(4)}>Q</Dia>
+    <Dia data-test="habit-day" clicado={clicado[5]} onClick={() => clicked(5)}>S</Dia>
+    <Dia data-test="habit-day" clicado={clicado[6]} onClick={() => clicked(6)}>S</Dia>
     </>
 )
     }

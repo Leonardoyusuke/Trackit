@@ -8,7 +8,7 @@ export default function Tops(){
     const foto = localStorage.getItem('picture');
     return(
         <>
-        <Top>
+        <Top data-test="header">
         <Logo>TrackIt</Logo>
         <Foto src={foto} />
         </Top>
